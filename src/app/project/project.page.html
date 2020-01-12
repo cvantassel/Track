@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start" (click)="returnHome()">
+      <ion-icon class="mediumIcon ion-float-left" name="arrow-round-back"></ion-icon>
+      </ion-buttons>
+    <ion-card-content>
+      
+      <ion-title class="bold twentyPt">
+        {{ project?.title }}
+      </ion-title>
+    </ion-card-content>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="dark" class="bold fifteenPt">Items</ion-label>
+    </ion-list-header>
+
+          
+    <ion-item *ngFor="let item of project?.items;">
+      <ion-avatar slot="start">
+        
+        <img *ngIf="item.image" src="item.image">
+        <ion-icon #elseBlock class="mediumIcon ion-float-left" name="radio-button-off"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+      </ion-label>
+    </ion-item>
+    </ion-list>
+    
+
+</ion-content >

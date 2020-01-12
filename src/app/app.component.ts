@@ -12,6 +12,7 @@ import { Meta } from '@angular/platform-browser';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

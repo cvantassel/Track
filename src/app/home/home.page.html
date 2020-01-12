@@ -1,68 +1,85 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-card-content>
-      <ion-title class="bold">
+    <ion-card-content class="homeTitle">
+      <ion-title class="bold twentyPt">
         Track
       </ion-title>
     </ion-card-content>
-    <ion-card class="headerCard">
-      <ion-card-header class="bold">
-         Insert line chart
-      </ion-card-header>
+    <ion-card class="headerCard"  #header>
       <ion-card-content>
-        <ion-item>01/01/2020</ion-item>
-        <ion-item>01/01/2020</ion-item>
-        <ion-item>01/01/2020</ion-item>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-card-header class="bold twentyFivePt">
+                25
+              </ion-card-header>
+              <ion-card-title>
+                Items used in the past week
+              </ion-card-title>
+            </ion-col>
+            <ion-col>
+              <!-- https://bootsoon.github.io/ng-circle-progress/ -->
+              <circle-progress [percent]="86" [radius]="60" [outerStrokeWidth]="10" [outerStrokeColor]="'#FF5668'"
+                [innerStrokeWidth]="6" [innerStrokeColor]="'#e7e8ea'" [space]="-7" [titleFontSize]="36"
+                [unitsFontSize]="36" [showSubtitle]="0" [animation]="true" [animationDuration]="300"></circle-progress>
 
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scrollEvents="true" appHideHeader [header]="header">
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button color="tertiary" data-desc="Project">
+        <ion-icon name="construct"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="tertiary" data-desc="Item">
+        <ion-icon name="pricetag"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
   <ion-list>
     <ion-list-header>
-      <ion-label color="dark" class="bold">Projects</ion-label>
+      <ion-label color="dark" class="bold fifteenPt">Projects</ion-label>
     </ion-list-header>
     <ion-grid no-padding>
+      <!-- Projects -->
       <ion-row nowrap class="categoryContainer">
-        <ion-col no-padding class="categoryContainerStart">
-          <ion-card>
-            <ion-card-header class="bold">
-              Clothes
+        <ion-col *ngFor="let project of projectsService.projects; let i = index" no-padding>
+          <ion-card [routerLink]="'/project/' + project.id" [ngClass]="cardColorClasses[i%3]">
+            <ion-card-header class="whiteFont bold fifteenPt">
+              {{project.title}}
             </ion-card-header>
             <ion-card-content>
 
             </ion-card-content>
           </ion-card>
         </ion-col>
-
+        <!-- Add New -->
         <ion-col no-padding>
           <ion-card>
-            <ion-card-header class="bold">
-              Board Games
-            </ion-card-header>
-            <ion-card-content>
-              01/01/2020
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-
-        <ion-col no-padding>
-          <ion-card>
-            <ion-card-header class="bold">
-              Add New
-            </ion-card-header>
-            <ion-card-content>
+            <ion-card-content class="iconContainer">
+              <ion-icon class="bold largeIcon" name="add-circle-outline"></ion-icon>
 
             </ion-card-content>
           </ion-card>
         </ion-col>
       </ion-row>
+      <!-- Popular Items -->
       <ion-row>
         <ion-list no-padding>
           <ion-list-header>
-            <ion-label color="dark" class="bold">Popular Items</ion-label>
+            <ion-label color="dark" class="bold fifteenPt">Popular Items</ion-label>
           </ion-list-header>
           <ion-item>
             <ion-avatar slot="start">
@@ -74,13 +91,63 @@
               <p>Listen, I've had a pretty messed up day...</p>
             </ion-label>
           </ion-item>
-          
-          
-          <!-- <ion-item>
-            <ion-label>Puerto Rico</ion-label>
-            <ion-note slot="end" color="tertiary">Board Games</ion-note> -->
 
-          <!-- </ion-item> -->
+
+          
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="./avatar-finn.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Finn</h2>
+              <h3>I'm a big deal</h3>
+              <p>Listen, I've had a pretty messed up day...</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="./avatar-finn.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Finn</h2>
+              <h3>I'm a big deal</h3>
+              <p>Listen, I've had a pretty messed up day...</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="./avatar-finn.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Finn</h2>
+              <h3>I'm a big deal</h3>
+              <p>Listen, I've had a pretty messed up day...</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="./avatar-finn.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Finn</h2>
+              <h3>I'm a big deal</h3>
+              <p>Listen, I've had a pretty messed up day...</p>
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-avatar slot="start">
+              <img src="./avatar-finn.png">
+            </ion-avatar>
+            <ion-label>
+              <h2>Finn</h2>
+              <h3>I'm a big deal</h3>
+              <p>Listen, I've had a pretty messed up day...</p>
+            </ion-label>
+          </ion-item>
         </ion-list>
       </ion-row>
     </ion-grid>
