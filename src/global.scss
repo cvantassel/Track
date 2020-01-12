@@ -24,3 +24,67 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+:root {
+    // success, warning, danger, light, medium
+    --ion-color-primary: #504D55;
+    --ion-color-secondary: #FFC50C;
+    --ion-color-tertiary: #FF5668;
+    --ion-color-dark: #25262C;
+    --ion-color-base: #25262C;
+}
+
+@font-face {
+    font-family: 'Campton';
+    src: url('/assets/fonts/campton/Campton-Bold.otf');
+  }
+
+ion-toolbar {
+    border-radius: 0 0 8px 8px;
+}
+ion-title{
+  text-align: center;
+  color: #fff !important;
+}
+ion-header::after {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    background-image: none !important;
+    bottom: 0px !important;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    height: 100px !important;
+}
+ion-card {
+    border-radius: 10px !important;
+    background-color: #fff !important;
+    min-width: 150px;
+}
+ion-list-header {
+    padding:25px 0 15px 25px;
+}
+ion-list {
+    width:100%;
+}
+
+.headerCard {
+    margin: 0 30px 20px 30px;
+
+}
+
+.bold {
+    font-family: 'Campton';
+    font-weight: 600;
+    font-size: 15pt;
+    color: var(--ion-color-base);
+}
+
+.categoryContainer {
+    overflow-x: scroll!important;
+        overflow-y: hidden;
+        word-wrap: break-word;
+}
+
+.categoryContainerStart {
+    padding-left: 20px ;
+}
