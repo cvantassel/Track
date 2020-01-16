@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="primary">
+
+    <ion-buttons slot="start" (click)="navCtrl.back()">
+      <ion-icon class="mediumIcon ion-float-left" name="arrow-round-back"></ion-icon>
+    </ion-buttons>
+    <ion-card-content class="ion-no-padding">
+
+      <ion-title class="projectTitle bold twentyPt">
+        New Item
+      </ion-title>
+    </ion-card-content>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top">
+      <ion-fab-button color="tertiary" data-desc="Project">
+        <ion-icon name="construct"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="tertiary" data-desc="Item">
+        <ion-icon name="pricetag"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label color="dark" class="bold fifteenPt">Item</ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Something Else</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+
+
+  </ion-list>
+
+
+</ion-content>

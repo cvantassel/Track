@@ -5,7 +5,7 @@
         Track
       </ion-title>
     </ion-card-content>
-    <ion-card class="headerCard"  #header>
+    <ion-card class="headerCard" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
       <ion-card-content>
         <ion-grid>
           <ion-row>
@@ -31,7 +31,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollEvents="true" appHideHeader [header]="header">
+<ion-content scrollEvents="true" #pageContent>
   <!-- FAB -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary">
@@ -42,7 +42,7 @@
       <ion-fab-button color="tertiary" data-desc="Project">
         <ion-icon name="construct"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="tertiary" data-desc="Item">
+      <ion-fab-button [routerLink]="'/new-item'" color="tertiary" data-desc="Item">
         <ion-icon name="pricetag"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
@@ -56,7 +56,7 @@
       <!-- Projects -->
       <ion-row nowrap class="categoryContainer">
         <ion-col *ngFor="let project of projectsService.projects; let i = index" no-padding>
-          <ion-card [routerLink]="'/project/' + project.id" [ngClass]="cardColorClasses[i%3]">
+          <ion-card [routerLink]="'/project/' + project.id" class="colorCard" [ngClass]="cardColorClasses[i%3]">
             <ion-card-header class="whiteFont bold fifteenPt">
               {{project.title}}
             </ion-card-header>
@@ -66,14 +66,14 @@
           </ion-card>
         </ion-col>
         <!-- Add New -->
-        <ion-col no-padding>
+        <!-- <ion-col no-padding>
           <ion-card>
             <ion-card-content class="iconContainer">
               <ion-icon class="bold largeIcon" name="add-circle-outline"></ion-icon>
 
             </ion-card-content>
           </ion-card>
-        </ion-col>
+        </ion-col> -->
       </ion-row>
       <!-- Popular Items -->
       <ion-row>

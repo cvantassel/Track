@@ -1,6 +1,8 @@
 {
   "name": "track",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "b8174ec5"
 }
