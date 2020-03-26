@@ -29,3 +29,7 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/api/app/config.py
+/api/app/__pycache__
+/api/__pycache__
+

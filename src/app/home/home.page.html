@@ -11,15 +11,15 @@
           <ion-row>
             <ion-col>
               <ion-card-header class="bold twentyFivePt">
-                25
+                {{ projectsService.usageCount }}
               </ion-card-header>
               <ion-card-title>
-                Items used in the past week
+                Items used in the past month
               </ion-card-title>
             </ion-col>
             <ion-col>
               <!-- https://bootsoon.github.io/ng-circle-progress/ -->
-              <circle-progress [percent]="86" [radius]="60" [outerStrokeWidth]="10" [outerStrokeColor]="'#FF5668'"
+              <circle-progress [percent]="projectsService.usagePercentage" [radius]="60" [outerStrokeWidth]="10" [outerStrokeColor]="'#FF5668'"
                 [innerStrokeWidth]="6" [innerStrokeColor]="'#e7e8ea'" [space]="-7" [titleFontSize]="36"
                 [unitsFontSize]="36" [showSubtitle]="0" [animation]="true" [animationDuration]="300"></circle-progress>
 
@@ -39,7 +39,7 @@
     </ion-fab-button>
 
     <ion-fab-list side="top">
-      <ion-fab-button color="tertiary" data-desc="Project">
+      <ion-fab-button [routerLink]="'/new-project'" color="tertiary" data-desc="Project">
         <ion-icon name="construct"></ion-icon>
       </ion-fab-button>
       <ion-fab-button [routerLink]="'/new-item'" color="tertiary" data-desc="Item">
@@ -52,11 +52,12 @@
     <ion-list-header>
       <ion-label color="dark" class="bold fifteenPt">Projects</ion-label>
     </ion-list-header>
-    <ion-grid no-padding>
-      <!-- Projects -->
+    <ion-grid class="ion-no-padding">
+      <!-- PROJECTS -->
       <ion-row nowrap class="categoryContainer">
-        <ion-col *ngFor="let project of projectsService.projects; let i = index" no-padding>
+        <ion-col *ngFor="let project of projectsService.projects; let i = index" class="ion-no-padding">
           <ion-card [routerLink]="'/project/' + project.id" class="colorCard" [ngClass]="cardColorClasses[i%3]">
+           <h2 class="whiteFont projectCount">{{project.items.length}}</h2>
             <ion-card-header class="whiteFont bold fifteenPt">
               {{project.title}}
             </ion-card-header>
@@ -65,89 +66,24 @@
             </ion-card-content>
           </ion-card>
         </ion-col>
-        <!-- Add New -->
-        <!-- <ion-col no-padding>
-          <ion-card>
-            <ion-card-content class="iconContainer">
-              <ion-icon class="bold largeIcon" name="add-circle-outline"></ion-icon>
-
-            </ion-card-content>
-          </ion-card>
-        </ion-col> -->
       </ion-row>
-      <!-- Popular Items -->
+
+      <!-- POPULAR ITEMS -->
       <ion-row>
-        <ion-list no-padding>
+        <ion-list class="ion-no-padding">
           <ion-list-header>
             <ion-label color="dark" class="bold fifteenPt">Popular Items</ion-label>
           </ion-list-header>
-          <ion-item>
+          <ion-item *ngFor="let item of projectsService.topFiveItems; let i = index" >
             <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
+              <span>{{item.usecount}}</span>
             </ion-avatar>
             <ion-label>
-              <h2>Finn</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
+              <h2>{{item.title}} <span *ngIf="item.description">- {{item.description}}</span></h2>
+              <p>{{item.project}}</p>
             </ion-label>
           </ion-item>
 
-
-          
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Finn</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Finn</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Finn</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Finn</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
-            </ion-label>
-          </ion-item>
-
-          <ion-item>
-            <ion-avatar slot="start">
-              <img src="./avatar-finn.png">
-            </ion-avatar>
-            <ion-label>
-              <h2>Finn</h2>
-              <h3>I'm a big deal</h3>
-              <p>Listen, I've had a pretty messed up day...</p>
-            </ion-label>
-          </ion-item>
         </ion-list>
       </ion-row>
     </ion-grid>

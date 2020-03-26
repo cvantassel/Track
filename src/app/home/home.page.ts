@@ -17,14 +17,18 @@ export class HomePage {
   // private projectsArr: object[] = [{title: "Clothes"}, {title: "Board Games"}, {title: "Other"}]
 
   headerScrollConfig: ScrollHideConfig = { cssProperty: 'margin-top', maxValue: 200 };
+  usageCount: number;
+  usagePercentage: Number;
 
   constructor(
     public navCtrl: NavController,
-    private projectsService: ProjectsService) {}
+    private projectsService: ProjectsService) {
+    }
 
   goToProject(projectId){
     this.navCtrl.navigateForward('/project/' + projectId);
   }
+
   
 
 }

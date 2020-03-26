@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+// import { File } from '@ionic-native/file/ngx';
+
 
 @Component({
   selector: 'app-new-item',
@@ -9,9 +11,11 @@ import { NavController } from '@ionic/angular';
 export class NewItemPage implements OnInit {
 
   constructor(
-    public navCtrl: NavController) { }
+    public navCtrl: NavController
+    ) { }
 
   ngOnInit() {
+    
   }
 
 }

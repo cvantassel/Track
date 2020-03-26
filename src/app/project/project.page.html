@@ -38,9 +38,7 @@
           
     <ion-item *ngFor="let item of project?.items;">
       <ion-avatar slot="start">
-        
-        <img *ngIf="item.image" src="item.image">
-        <ion-icon #elseBlock class="mediumIcon ion-float-left" name="radio-button-off"></ion-icon>
+        <span>{{item.usecount}}</span>
       </ion-avatar>
       <ion-label>
         <h2>{{item.title}}</h2>
