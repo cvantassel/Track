@@ -48,7 +48,6 @@ export class ProjectsService {
       this.topFiveItems = this.getTopFive();
       this.getUsageStats();
       console.log("Projects" , this.projects)
-
     })
     
   }
@@ -86,11 +85,10 @@ export class ProjectsService {
       date = Date.parse(item.lastuse)
       if (date > lastMonth) usageCount++
     }
-    console.log(usageCount)
     this.usageCount = usageCount;
     this.usagePercentage = Math.round(usageCount/totalCount * 100);
-    console.log(this.usagePercentage)
   }
+
 
 
   // Heap Sort

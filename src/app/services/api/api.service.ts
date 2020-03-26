@@ -10,16 +10,32 @@ export class ApiService {
 
   constructor(public http: HttpClient) {
     this.endpoint = "http://localhost:5000/"
-    }
-  
-  getProjectData() {
+  }
+
+  postItem(postItemBody: any) {
     return new Promise((resolve, reject) => {
-      this.http.get(this.endpoint + '/getProjects/')
-      .subscribe((response: any) => {
+      this.http.post(this.endpoint + '/postItem/',
+        JSON.stringify(postItemBody),
+        {
+          headers: { 'Content-Type': 'application/json' },
+          responseType: 'text'
+        }
+      ).subscribe((response: any) => {
         resolve(response);
       }, error => {
         reject(error);
       })
+    })
+  }
+
+  getProjectData() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.endpoint + '/getProjects/')
+        .subscribe((response: any) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        })
     })
   }
 
