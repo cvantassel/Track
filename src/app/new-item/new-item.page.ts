@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ProjectsService } from '../services/projects/projects.service';
 import { ApiService } from '../services/api/api.service';
+import { Router } from '@angular/router';
 // import { File } from '@ionic-native/file/ngx';
 
 
@@ -20,7 +21,8 @@ export class NewItemPage implements OnInit {
   constructor(
     public navCtrl: NavController,
     private projectsService: ProjectsService,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -37,6 +39,7 @@ export class NewItemPage implements OnInit {
     this.api.postItem(body)
     .then((response) => {
       console.log(response)
+      this.router.navigateByUrl('/home');
     })
   }
 

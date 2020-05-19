@@ -5,6 +5,10 @@ from flask import render_template, request
 from flask_cors import CORS, cross_origin
 import json
 import ast
+import qrcode
+import subprocess
+from datetime import datetime
+
 
 cors = CORS(app)
 # app.config['CORS_HEADERS'] = 'Content-Type'
@@ -32,10 +36,40 @@ def getProjects():
     # for element in response:
     #     result += str(element)
     
-    
     db.close()
     return ast.literal_eval(result)
 
+@app.route('/postItem/', methods=['POST'])
+@cross_origin()
+def postItem():
+    data = request.get_json()
+    print(data)
+
+    db = psycopg2.connect(**config)
+    cur = db.cursor()
+
+    query = '''insert into items (title, relatedprojectid, description) values ('{0}', '{1}', '{2}') RETURNING id;'''.format(data['title'], data['project'], data['description'])
+
+    try:
+        response = cur.execute(query)
+        db.commit()
+    except Exception as ex:
+        print("THE FOLLOWING QUERY FAILED:", query)
+        print("WITH ERROR", str(ex))
+        return ex
+
+    print("RES:")
+    print(postItemId)
+    
+    # url = pyqrcode.create('https://google.com')
+    # url.svg('google.svg', scale=8)
+    img = qrcode.make("http://192.168.1.242:5000/useItem?itemId=" + postItemId)
+    img.save("app/qrcodes/" + postItemId + ".svg")
+
+    os.system("lpr -P name app/qrcodes/" + postItemId + ".svg")
+            
+    return data
+    
 
 @app.route('/newProject/', methods=['POST'])
 def postProject():   
@@ -44,6 +78,19 @@ def postProject():
     # return getCol(request.form['column'])
     return data
     
+@app.route('/useItem/', methods=['GET'])
+@cross_origin()
+def getProjects():
+    itemId = request.args.get('itemId')
+
+    db = psycopg2.connect(**config)
+    cur = db.cursor()
+    sql = """UPDATE items SET usecount = usecount + 1, set lastuse = {0} where id = {1};""".format(datetime.today().strftime('%Y-%m-%d'), itemId)
+    cur.execute(sql) 
+    response = cur.fetchall()
+    
+    db.close()
+    return response
 
 def getCol(column):
     db = psycopg2.connect(**config)

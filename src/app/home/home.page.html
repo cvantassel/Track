@@ -5,7 +5,9 @@
         Track
       </ion-title>
     </ion-card-content>
-    <ion-card class="headerCard" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent">
+    <!-- <ion-card class="headerCard" [scrollHide]="headerScrollConfig" [scrollContent]="pageContent"> -->
+      <ion-card class="headerCard">
+
       <ion-card-content>
         <ion-grid>
           <ion-row>
@@ -31,7 +33,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content scrollEvents="true" #pageContent>
+<ion-content >
   <!-- FAB -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="tertiary">

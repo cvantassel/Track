@@ -9,7 +9,7 @@ export class ApiService {
   endpoint: string;
 
   constructor(public http: HttpClient) {
-    this.endpoint = "http://localhost:5000/"
+    this.endpoint = "http://localhost:5000"
   }
 
   postItem(postItemBody: any) {
