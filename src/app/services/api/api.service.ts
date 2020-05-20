@@ -39,4 +39,15 @@ export class ApiService {
     })
   }
 
+  handleScan(link) {
+    return new Promise((resolve, reject) => {
+      this.http.get(link, {responseType: 'text'})
+        .subscribe((response: any) => {
+          resolve(response);
+        }, error => {
+          reject(error);
+        })
+    })
+  }
+
 }

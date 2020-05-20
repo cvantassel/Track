@@ -8,6 +8,7 @@ import ast
 import qrcode
 import subprocess
 from datetime import datetime
+import os
 
 
 cors = CORS(app)
@@ -51,7 +52,8 @@ def postItem():
     query = '''insert into items (title, relatedprojectid, description) values ('{0}', '{1}', '{2}') RETURNING id;'''.format(data['title'], data['project'], data['description'])
 
     try:
-        response = cur.execute(query)
+        cur.execute(query)
+        postItemId = str(cur.fetchall()[0][0])
         db.commit()
     except Exception as ex:
         print("THE FOLLOWING QUERY FAILED:", query)
@@ -63,7 +65,9 @@ def postItem():
     
     # url = pyqrcode.create('https://google.com')
     # url.svg('google.svg', scale=8)
-    img = qrcode.make("http://192.168.1.242:5000/useItem?itemId=" + postItemId)
+    img = qrcode.make("http://localhost:5000/useItem?itemId=" + postItemId)
+
+    # img = qrcode.make("http://192.168.1.242:5000/useItem?itemId=" + postItemId)
     img.save("app/qrcodes/" + postItemId + ".svg")
 
     os.system("lpr -P name app/qrcodes/" + postItemId + ".svg")
@@ -80,17 +84,19 @@ def postProject():
     
 @app.route('/useItem/', methods=['GET'])
 @cross_origin()
-def getProjects():
+def useItem():
     itemId = request.args.get('itemId')
 
     db = psycopg2.connect(**config)
     cur = db.cursor()
-    sql = """UPDATE items SET usecount = usecount + 1, set lastuse = {0} where id = {1};""".format(datetime.today().strftime('%Y-%m-%d'), itemId)
+    sql = """UPDATE items SET usecount = usecount + 1, lastuse = '{0}' where id = {1};""".format(datetime.today().strftime('%Y-%m-%d'), itemId)
     cur.execute(sql) 
-    response = cur.fetchall()
+    db.commit()
+    # response = cur.fetchall()
     
     db.close()
-    return response
+    # return response
+    return 'Success'
 
 def getCol(column):
     db = psycopg2.connect(**config)
