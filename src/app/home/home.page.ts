@@ -13,7 +13,7 @@ export class HomePage {
 
   progress = 0;
 
-  private cardColorClasses: string[] = ["successColor","tertiaryColor","secondaryColor"];
+  public cardColorClasses: string[] = ["successColor","tertiaryColor","secondaryColor"];
   // private projectsArr: object[] = [{title: "Clothes"}, {title: "Board Games"}, {title: "Other"}]
 
   headerScrollConfig: ScrollHideConfig = { cssProperty: 'margin-top', maxValue: 200 };
@@ -22,7 +22,7 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    private projectsService: ProjectsService) {
+    public projectsService: ProjectsService) {
     }
 
   goToProject(projectId){

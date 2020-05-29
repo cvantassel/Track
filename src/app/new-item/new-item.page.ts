@@ -20,7 +20,7 @@ export class NewItemPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
-    private projectsService: ProjectsService,
+    public projectsService: ProjectsService,
     private api: ApiService,
     private router: Router
     ) { }
