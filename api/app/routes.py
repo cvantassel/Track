@@ -9,6 +9,7 @@ import qrcode
 import subprocess
 from datetime import datetime
 import os
+import socket
 
 
 cors = CORS(app)
@@ -18,7 +19,7 @@ cors = CORS(app)
 def index():
     return getProjects()
 
-@app.route('/getProjects/', methods=['GET'])
+@app.route('/api/getProjects/', methods=['GET'])
 @cross_origin()
 def getProjects():
     db = psycopg2.connect(**config)
@@ -40,7 +41,7 @@ def getProjects():
     db.close()
     return ast.literal_eval(result)
 
-@app.route('/postItem/', methods=['POST'])
+@app.route('/api/postItem/', methods=['POST'])
 @cross_origin()
 def postItem():
     data = request.get_json()
@@ -65,7 +66,9 @@ def postItem():
     
     # url = pyqrcode.create('https://google.com')
     # url.svg('google.svg', scale=8)
-    img = qrcode.make("http://localhost:5000/useItem?itemId=" + postItemId)
+    host_name = socket.gethostname() 
+    host_ip = socket.gethostbyname(host_name)
+    img = qrcode.make(host_ip + "/api/useItem?itemId=" + postItemId)
 
     # img = qrcode.make("http://192.168.1.242:5000/useItem?itemId=" + postItemId)
     img.save("app/qrcodes/" + postItemId + ".svg")
@@ -75,14 +78,14 @@ def postItem():
     return data
     
 
-@app.route('/newProject/', methods=['POST'])
+@app.route('/api/newProject/', methods=['POST'])
 def postProject():   
     data = request.get_json()
     print(data["yo"])
     # return getCol(request.form['column'])
     return data
     
-@app.route('/useItem/', methods=['GET'])
+@app.route('/api/useItem/', methods=['GET'])
 @cross_origin()
 def useItem():
     itemId = request.args.get('itemId')
